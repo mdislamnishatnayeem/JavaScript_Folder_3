@@ -44,7 +44,7 @@ printf("Wrong Keyword");
 //Here is my code
 
 
-/-----------------------------------
+//-----------------------------------
 
 #include<stdio.h>
 #include<string.h>
