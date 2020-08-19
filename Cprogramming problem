@@ -1,0 +1,85 @@
+
+
+//Problem :
+
+//user যদি circle input দেয় তাহলে radius চাইবে আর area বের করে দিবে। 
+
+//আর user যদি triangle input দেয় তবে hight and base চাইবে এবং area বের করে দিবে।
+
+#include<stdio.h>
+main()
+{
+float pi=3.1416;
+float r,h,b,area1,area2;
+char x[20];
+printf("Enter the name of area:");
+scanf("%s",&x);
+
+switch(x)
+{
+case 'circle':
+printf("/n Enter the value of radius:");
+scanf("%f",&r);
+area1=(pi)*(r*r);
+printf("The value of area is:%.2f",area1);
+break;
+
+case 'triangle':
+printf("Enter the value of hight and base:");
+scanf("%f%f",&h,&b);
+area2=(0.5)*(h*b);
+printf("The value of area is:%.2f",area2);
+break;
+
+default:
+printf("Wrong Keyword");
+
+}
+}
+
+//কোথায় ভুল করেছি.????
+
+
+//আমি এই সমাধান বের করেছি!! আপ্নার সমাধান কি?
+//Here is my code
+
+
+/-----------------------------------
+
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+
+float pi=3.1416;
+float r,h,b,area1,area2;
+char xxx[20];
+    
+printf("Enter the name of area:");
+scanf("%s",&xxx);
+int length=strlen(xxx);  
+    
+switch(length){
+
+case 6:
+printf("/n Enter the value of radius:");
+scanf("%f",&r);
+area1=(pi)*(r*r);
+printf("The value of area is:%0.2f",area1);
+break;
+
+case 8:
+
+printf("Enter the value of hight and base:");
+scanf("%f%f",&h,&b);
+area2=(0.5)*(h*b);
+printf("The value of area is:%0.2f",area2);
+break;
+
+default:
+printf("Wrong Keyword");
+
+  }
+   return 0;
+}
+//C language
