@@ -1,0 +1,251 @@
+// a linked list can provide these properties.1.createlist
+//2.insertatposition
+//3.insertathead
+//4.insertattall
+//5.deleteatposition
+//6.deletehead
+//7.deletetail
+//8.searchelementexists
+//9.indexofsearchedelement
+
+//code frome a big brother(C++code)
+
+//double linked list
+#include<iostream>
+using namespace std;
+class Node
+{
+public:
+    int data;
+    Node *pre;
+    Node *next;
+};
+class Linkedlist
+{
+    Node *head,*tail;
+public:
+    Linkedlist()
+    {
+        head=NULL;
+        tail=NULL;
+    }
+    Node *create()
+    {
+        Node *node=new Node;
+        node->next=NULL;
+        node->pre=NULL;
+        return node;
+    }
+    int getdata()
+    {
+        int value;
+        cin>>value;
+        return value;
+    }
+    void adddata(Node *p,int data)
+    {
+        p->data=data;
+    }
+    Node *fullnode()
+    {
+        Node *curent=create();
+        adddata(curent,getdata());
+        return curent;
+    }
+    void doublelinkedlist(int range)
+    {
+        head=tail=create();
+        cout<<"Enter data now:";
+        adddata(tail,getdata());
+        Node *holdhead;
+        for(int i=1; i<range; i++)
+        {
+            holdhead=tail;
+            tail->next=fullnode();
+            tail=tail->next;
+            tail->pre=holdhead;
+        }
+    }
+    Node insertathead()
+    {
+        if(head==NULL)
+        {
+            cout<<"list is empty"<<endl;
+        }
+        else
+        {
+            Node *c=fullnode();
+            c->next=head;
+            head->pre=c;
+            head=c;
+        }
+
+    }
+    Node deleteathead()
+    {
+        if(head==NULL)
+        {
+            cout<<"list is empty"<<endl;
+        }
+        else
+        {
+            head=head->next;
+            head->pre=NULL;
+        }
+    }
+    Node insertattail()
+    {
+        if(tail==NULL)
+        {
+            cout<<"list is empty";
+        }
+        else
+        {
+            Node *tailnode=fullnode();
+            tail->next=tailnode;
+            tail=tailnode;
+        }
+    }
+    Node deletetail()
+    {
+        if(tail==NULL)
+        {
+            cout<<"list is empty";
+        }
+        else
+        {
+            Node *holdhead=head;
+            Node *holdheadnext=head->next;
+            while(holdheadnext->next!=NULL)
+            {
+                holdhead=holdheadnext;
+                holdheadnext=holdheadnext->next;
+            }
+            holdhead->next=NULL;
+            delete holdheadnext;
+        }
+    }
+    Node insertatposition(int posi)
+    {
+        if(posi<=0)
+        {
+            cout<<"list is empty"<<endl;
+        }
+        else
+        {
+            Node *newhead=head;
+            cout<<"input data:";
+            Node *newnode=fullnode();
+            for(int i=1; i<posi; i++)
+            {
+                newhead=newhead->next;
+            }
+            newnode->next=newhead->next;
+            newnode->pre=newhead;
+            newhead->next=newnode;
+        }
+    }
+    Node deleteatposition(int posi)
+    {
+        if(posi<=0)
+        {
+            cout<<"list is empty"<<endl;
+        }
+        else
+        {
+            Node *hold;
+            Node *holdhead=head;
+            for(int i=1; i<posi; i++)
+            {
+                holdhead=holdhead->next;
+            }
+            hold=holdhead->next;
+            holdhead->next=hold->next;
+        }
+    }
+    bool searchelement(int data)
+    {
+        Node *holdhead=head;
+        while(holdhead!=NULL)
+        {
+            if(holdhead->data==data)
+            {
+                cout<<data<<" is found."<<endl;
+                return true;
+            }
+            holdhead=holdhead->next;
+        }
+        cout<<"data not found"<<endl;
+        return false;
+    }
+    int searchindex(int data)
+    {
+        int count=1;
+        Node *holdhead=head;
+        while(holdhead!=NULL)
+        {
+            if(holdhead->data==data)
+            {
+                cout<<data<<" is found at index "<<count<<endl;
+                return count;
+            }
+            holdhead=holdhead->next;
+            count++;
+        }
+        cout<<"data not found"<<endl;
+        return false;
+    }
+    void show()
+    {
+        if(head==NULL)
+        {
+            cout<<"list is empty"<<endl;
+        }
+        else
+        {
+            cout<<"double linkedlist:";
+            Node *holdhead=head;
+            while(holdhead!=NULL)
+            {
+                cout<<holdhead->data<<" ";
+                holdhead=holdhead->next;
+            }
+            cout<<endl;
+        }
+    }
+};
+int main()
+{
+    Linkedlist l;
+    int range,posi,data;
+    cout<<"Enter list size:";
+    cin>>range;
+    l.doublelinkedlist(range);
+    l.show();
+    cout<<"Inset at head:";
+    l.insertathead();
+    l.show();
+    cout<<"After deleting head ";
+    l.deleteathead();
+    l.show();
+    cout<<"Inset at tail:";
+    l.insertattail();
+    l.show();
+    cout<<"After deleteing tail ";
+    l.deletetail();
+    l.show();
+    cout<<"Insert at position:";
+    cin>>posi;
+    l.insertatposition(posi);
+    l.show();
+    cout<<"delete at position:";
+    cin>>posi;
+    l.deleteatposition(posi);
+    l.show();
+    cout<<"searching data:";
+    cin>>data;
+    l.searchelement(data);
+    cout<<"Index of searching data:";
+    cin>>data;
+    l.searchindex(data);
+}
